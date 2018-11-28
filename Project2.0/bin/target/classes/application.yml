@@ -1,0 +1,8 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: [beans, conditions, configprops, env, heapdump, logfile, loggers, metrics, sessions, shutdown]
+  endpoint:
+    shutdown:
+      enabled: true
