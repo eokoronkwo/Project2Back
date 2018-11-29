@@ -1,9 +1,7 @@
 package com.revature.repositories;
 
-
 import java.util.List;
 
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -17,22 +15,17 @@ import com.revature.models.Exercise;
 public class ExerciseRepository {
 
 	static SessionFactory sf;
-	
-//	@Autowired
-//	public ExerciseRepository(SessionFactory sf) {
-//		this.sf = sf;
-//	}
-	
-	public Exercise[] saveExercise(Exercise... exercises) {
-		try (Session session = sf.openSession()) {
-			for (Exercise exercise : exercises) {
-				exercise = new Exercise();
-				session.save(exercise);
-			}
-			return exercises;
-		}
+
+	@Autowired
+	public ExerciseRepository(SessionFactory sf) {
+		this.sf = sf;
 	}
-	
+
+	public List<Exercise> saveExercise(List<Exercise> exercises) {
+		sf.getCurrentSession().saveOrUpdate(exercises);
+		return exercises;
+	}
+
 	public List<Exercise> nativeQueryGetExercisesById(int userId) {
 		try (Session session = sf.openSession()) {
 			List<Exercise> exercises = session
@@ -41,7 +34,7 @@ public class ExerciseRepository {
 			return exercises;
 		}
 	}
-	
+
 	public Exercise deleteExercise(Exercise exercise) {
 		try (Session session = sf.openSession()) {
 			Transaction tx = session.beginTransaction();

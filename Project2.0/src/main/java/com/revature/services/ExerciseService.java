@@ -19,7 +19,7 @@ public class ExerciseService {
 		this.exerciseRepository = exerciseRepository;
 	}
 	
-	public Exercise[] saveExcercise(Exercise... exercises) {
+	public List<Exercise> saveExcercise(List<Exercise> exercises) {
 		return exerciseRepository.saveExercise(exercises);
 	}
 	

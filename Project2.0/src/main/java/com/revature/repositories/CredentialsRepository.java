@@ -37,6 +37,7 @@ public class CredentialsRepository {
 	}
 
 	public void save(User user) {
+		System.out.println(user);
 		sf.getCurrentSession().save(user);
 		
 	}

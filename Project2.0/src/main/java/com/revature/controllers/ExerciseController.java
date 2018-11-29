@@ -29,7 +29,7 @@ public class ExerciseController {
 	}
 
 	@PostMapping("")
-	public Exercise[] saveExercise(@RequestBody Exercise[] exercises) {
+	public List<Exercise> saveExercise(@RequestBody List<Exercise> exercises) {
 		return exerciseService.saveExcercise(exercises);
 	}
 	
