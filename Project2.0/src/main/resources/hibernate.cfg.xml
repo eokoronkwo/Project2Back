@@ -1,0 +1,21 @@
+<!DOCTYPE hibernate-configuration SYSTEM "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+		
+		<property name="hibernate.connection.url">jdbc:postgresql://classdb.cld8hl7sh27g.us-east-2.rds.amazonaws.com/project2</property>
+		<property name="hibernate.connection.username">project</property>
+		<property name="hibernate.connection.password">password</property>
+		<!-- Prints executed SQL statements to the console -->
+		<property name="show_sql">true</property>
+		<!-- Connection Pooling - JDBC gets a connection object and generally when we're done
+				we release that object. However, the act of getting a connection is expensive.
+				In many ways, it makes more sense to save that connection for later transactions
+				rather than relinquishing that connection. Hibernate will pool a number of connections
+				which stay available until needed. -->
+		<property name="hibernate.connection.pool_size">10</property>
+		
+		<property name="hibernate.hbm2ddl.auto">update</property>
+	</session-factory>
+</hibernate-configuration>
