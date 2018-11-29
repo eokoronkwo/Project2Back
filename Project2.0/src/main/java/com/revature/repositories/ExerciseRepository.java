@@ -1,6 +1,5 @@
 package com.revature.repositories;
 
-
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -37,7 +36,7 @@ public class ExerciseRepository {
 			System.out.println(user.getId());
 			return exercises;
 	}
-	
+
 	public Exercise deleteExercise(Exercise exercise) {
 			Transaction tx = sf.getCurrentSession().beginTransaction();
 			sf.getCurrentSession().delete(exercise);

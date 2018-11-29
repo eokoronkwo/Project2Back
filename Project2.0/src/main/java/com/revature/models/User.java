@@ -9,11 +9,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Users")
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -27,6 +27,7 @@ public class User {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
 	public int getId() {
 		return id;
 	}
@@ -45,6 +46,12 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	public String getUsername() {
+		return userName;
+	}
+	public void setUsername(String username) {
+		this.userName = username;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -55,6 +62,7 @@ public class User {
 		return birthday;
 	}
 	public void setBirthday(String birthday) {
+
 		this.birthday = birthday;
 	}
 	public User() {
@@ -69,6 +77,11 @@ public class User {
 		this.email = email;
 		this.birthday = birthday;
 		this.userName = userName;
+	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ ", birthday=" + birthday + ", userName=" + userName + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -121,12 +134,6 @@ public class User {
 		return true;
 	}
 	
-	
 
 	
-	
-
-	
-	
-
 }

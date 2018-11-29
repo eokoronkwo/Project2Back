@@ -10,7 +10,7 @@ import com.revature.models.User;
 @Repository
 public class UserRepository {
 
-	static SessionFactory sf;
+	SessionFactory sf;
 
 	@Autowired
 	public UserRepository(SessionFactory sf) {
