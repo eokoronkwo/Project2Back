@@ -3,6 +3,7 @@ package com.revature.repositories;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -12,20 +13,24 @@ import org.springframework.stereotype.Repository;
 import com.revature.models.Exercise;
 
 @Repository
+
 public class ExerciseRepository {
 
-	SessionFactory sf;
+	static SessionFactory sf;
 	
-	@Autowired
-	public ExerciseRepository(SessionFactory sf) {
-		this.sf = sf;
-	}
+//	@Autowired
+//	public ExerciseRepository(SessionFactory sf) {
+//		this.sf = sf;
+//	}
 	
 	public Exercise[] saveExercise(Exercise... exercises) {
-		for (Exercise exercise : exercises) {
-			sf.getCurrentSession().save(exercise);
+		try (Session session = sf.openSession()) {
+			for (Exercise exercise : exercises) {
+				exercise = new Exercise();
+				session.save(exercise);
+			}
+			return exercises;
 		}
-		return exercises;
 	}
 	
 	public List<Exercise> nativeQueryGetExercisesById(int userId) {

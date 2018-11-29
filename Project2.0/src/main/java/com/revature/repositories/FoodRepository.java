@@ -20,15 +20,15 @@ public class FoodRepository {
 		this.sf = sf;
 	}
 	
-	@Transactional
 	public Food[] saveFood(Food... foods) {
-		for (Food food : foods) {
-			sf.getCurrentSession().save(food);
+		try (Session session = sf.openSession()) {
+			for (Food food : foods) {
+				sf.getCurrentSession().save(food);
+			}
+			return foods;
 		}
-		return foods;
 	}
 	
-	@Transactional
 	public List<Food> nativeQueryGetFoodById(int userId) {
 		try (Session session = sf.openSession()) {
 			List<Food> foods = session
@@ -38,7 +38,6 @@ public class FoodRepository {
 		}
 	}
 	
-	@Transactional
 	public Food deleteFood(Food food) {
 		try (Session session = sf.openSession()) {
 			Transaction tx = session.beginTransaction();
