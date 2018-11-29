@@ -1,14 +1,9 @@
 package com.revature.models;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,10 +15,15 @@ public class Exercise {
 	private String name;
 	private String date;
 	private float calories;
+	private int userId;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id")
-	private User user;
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 
 	public int getId() {
 		return id;
@@ -57,14 +57,6 @@ public class Exercise {
 		this.calories = calories;
 	}
 
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -73,7 +65,7 @@ public class Exercise {
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + userId;
 		return result;
 	}
 
@@ -100,38 +92,30 @@ public class Exercise {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
+		if (userId != other.userId)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Exercises [id=" + id + ", name=" + name + ", date=" + date + ", calories=" + calories + ", user=" + user
-				+ "]";
+		return "Exercise [id=" + id + ", name=" + name + ", date=" + date + ", calories=" + calories + ", userId="
+				+ userId + "]";
 	}
 
-	public Exercise(int id, String name, String date, float calories, User user) {
+	public Exercise(int id, String name, String date, float calories, int userId) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.date = date;
 		this.calories = calories;
-		this.user = user;
+		this.userId = userId;
 	}
 
 	public Exercise() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-	
-
-	
-
 	
 	
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.decode.DecodeToken;
 import com.revature.models.Food;
+import com.revature.models.User;
 import com.revature.services.FoodService;
 
 @RestController
@@ -31,13 +32,13 @@ public class FoodController {
 	}
 
 	@PostMapping("")
-	public Food[] saveFood(@RequestBody Food[] foods) {
+	public Food []saveFood(@RequestBody Food[] foods) {
 		return foodService.saveFood(foods);
 	}
 	
 	@GetMapping("")
-	public List<Food> getFoods(@RequestBody int userId) {
-		return foodService.getFoods(userId);
+	public List<Food> getFoods(@RequestBody User user) {
+		return foodService.getFoods(user);
 	}
 	
 	@DeleteMapping("")

@@ -1,7 +1,5 @@
 package com.revature.models;
 
-import java.time.LocalDate;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +17,16 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String email;
-	private LocalDate birthday;
+	private String birthday;
+	private String userName;
+	
+	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 	public int getId() {
 		return id;
 	}
@@ -44,11 +51,24 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public LocalDate getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(LocalDate birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
+	}
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public User(int id, String firstName, String lastName, String email, String birthday, String userName) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.birthday = birthday;
+		this.userName = userName;
 	}
 	@Override
 	public int hashCode() {
@@ -59,6 +79,7 @@ public class User {
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
 		return result;
 	}
 	@Override
@@ -92,24 +113,12 @@ public class User {
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
+		if (userName == null) {
+			if (other.userName != null)
+				return false;
+		} else if (!userName.equals(other.userName))
+			return false;
 		return true;
-	}
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", birthday=" + birthday + "]";
-	}
-	public User(int id, String firstName, String lastName, String email, LocalDate birthday) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.birthday = birthday;
-	}
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	

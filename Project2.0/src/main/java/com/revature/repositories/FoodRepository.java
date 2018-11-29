@@ -7,9 +7,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.models.Food;
+import com.revature.models.User;
 
 @Repository
 public class FoodRepository {
@@ -20,30 +20,26 @@ public class FoodRepository {
 		this.sf = sf;
 	}
 	
-	public Food[] saveFood(Food... foods) {
-		try (Session session = sf.openSession()) {
+	public Food[] saveFood(Food[] foods) {
 			for (Food food : foods) {
 				sf.getCurrentSession().save(food);
 			}
 			return foods;
-		}
 	}
 	
-	public List<Food> nativeQueryGetFoodById(int userId) {
+	public List<Food> nativeQueryGetFoodById(User user) {
 		try (Session session = sf.openSession()) {
 			List<Food> foods = session
-					.createNativeQuery("SELECT * FROM food WHERE user_id = :userId", Food.class)
-					.setParameter("userId", userId).getResultList();
+					.createNativeQuery("SELECT * FROM food WHERE userid = :userId", Food.class)
+					.setParameter("userId", user.getId()).getResultList();
 			return foods;
 		}
 	}
 	
 	public Food deleteFood(Food food) {
-		try (Session session = sf.openSession()) {
-			Transaction tx = session.beginTransaction();
-			session.delete(food);
+			Transaction tx = sf.getCurrentSession().beginTransaction();
+			sf.getCurrentSession().delete(food);
 			tx.commit();
-		}
 		return food;
 	}
 
