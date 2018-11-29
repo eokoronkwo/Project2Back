@@ -28,12 +28,10 @@ public class FoodRepository {
 	}
 	
 	public List<Food> nativeQueryGetFoodById(User user) {
-		try (Session session = sf.openSession()) {
-			List<Food> foods = session
+			List<Food> foods = sf.getCurrentSession()
 					.createNativeQuery("SELECT * FROM food WHERE userid = :userId", Food.class)
 					.setParameter("userId", user.getId()).getResultList();
 			return foods;
-		}
 	}
 	
 	public Food deleteFood(Food food) {

@@ -11,7 +11,6 @@ import com.revature.models.Exercise;
 import com.revature.models.User;
 
 @Repository
-
 public class ExerciseRepository {
 
 	SessionFactory sf;
@@ -29,7 +28,6 @@ public class ExerciseRepository {
 	}
 	
 	public List<Exercise> nativeQueryGetExercisesById(User user) {
-			
 			List<Exercise> exercises = sf.getCurrentSession()
 					.createNativeQuery("SELECT * FROM exercises WHERE userid = :userId", Exercise.class)
 					.setParameter("userId", user.getId()).getResultList();

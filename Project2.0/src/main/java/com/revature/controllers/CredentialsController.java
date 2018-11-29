@@ -14,17 +14,20 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.models.Credentials;
 import com.revature.models.User;
 import com.revature.services.CredentialsService;
+import com.revature.services.UserService;
 
 @RestController
 @RequestMapping("credentials")
 public class CredentialsController {
 
 	CredentialsService credentialsService;
+	UserService userService;
 
 	@Autowired
-	public CredentialsController(CredentialsService credentialsService) {
+	public CredentialsController(CredentialsService credentialsService, UserService userService) {
 		super();
 		this.credentialsService = credentialsService;
+		this.userService = userService;
 	}
 
 	@PostMapping("check")
@@ -67,24 +70,23 @@ public class CredentialsController {
 
 	@PostMapping("login")
 	@CrossOrigin(origins = "*")
-	public boolean login(@RequestBody Credentials credentials) {
+	public User login(@RequestBody Credentials credentials) {
 
 		System.out.println(credentials.getUsername());
 		System.out.println(credentials.getPassword());
-
-		System.out.println(credentials.getPassword());
+		
 		List<Credentials> credentialsList = new ArrayList<>();
 		credentialsList = credentialsService.check(credentials);
 		for (int x = 0; x < credentialsList.size(); x++) {
 			if ((credentialsList.get(x).getUsername().equals(credentials.getUsername())) && (BCrypt.checkpw(credentials.getPassword(), credentialsList.get(x).getPassword()))) {
 
 				System.out.println("It matches");
-				return true;
+				return userService.getUserByUsername(credentials.getUsername());
 			} 
 
 		}
 		System.out.println("failed");
-		return false;
+		return null;
 	}
 
 }
