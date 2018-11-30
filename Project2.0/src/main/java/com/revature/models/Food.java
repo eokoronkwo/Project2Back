@@ -1,5 +1,7 @@
 package com.revature.models;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,61 +18,36 @@ public class Food {
 	private String date;
 	private float calories;
 	private int userId;
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
 	public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 	public String getDate() {
 		return date;
 	}
-
 	public void setDate(String date) {
 		this.date = date;
 	}
-
 	public float getCalories() {
 		return calories;
 	}
-
 	public void setCalories(float calories) {
 		this.calories = calories;
 	}
-
-	public Food() {
-		super();
-		// TODO Auto-generated constructor stub
+	public int getUserId() {
+		return userId;
 	}
-
-	public Food(int id, String name, String date, float calories, int userId) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.date = date;
-		this.calories = calories;
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -82,7 +59,6 @@ public class Food {
 		result = prime * result + userId;
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -110,11 +86,25 @@ public class Food {
 			return false;
 		return true;
 	}
-
 	@Override
 	public String toString() {
 		return "Food [id=" + id + ", name=" + name + ", date=" + date + ", calories=" + calories + ", userId=" + userId
 				+ "]";
 	}
+	public Food(int id, String name, String date, float calories, int userId) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.date = date;
+		this.calories = calories;
+		this.userId = userId;
+	}
+	public Food() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
 
 }
